@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -10,6 +9,11 @@
 
   	<!--   customize function -->
   	<script type="text/javascript">
+
+	// Burrito Sofas
+	// Code by Nathan Duffy and Rory Murphy
+
+
       // load google visualization packages
       google.load('visualization', '1', {'packages': ['geomap']});
         
@@ -40,7 +44,7 @@
       	// read data      	
       	var data = response.getDataTable();
       	
-      	// create new data
+      	// create new data and seperate into 2 tables
       	var newdata1 = new google.visualization.DataTable();
 	var newdata2 = new google.visualization.DataTable();
       	newdata1.addColumn('string', 'State');
@@ -69,6 +73,9 @@
 	
 	newdata1.sort(0);
 	newdata2.sort(0);
+
+	//combine the data from 2009 vs 2005
+	//if data is missing from one of these datasets, just set the total toxicity change to 0
 	var rows1 = newdata1.getNumberOfRows();
 	var rows2 = newdata2.getNumberOfRows();
 	for(var i = 0;i<rows1;i++){
@@ -101,7 +108,7 @@
       	options['dataMode'] = 'regions';
       	options['width'] = 900;
       	options['height'] = 550;
-	options['colors']=[0xFFEF3D,0xDB1212]
+	options['colors']=[0xFFEF3D,0xDB1212] //yellow to red map
 
         var viz = document.getElementById('map_canvas');
         new google.visualization.GeoMap(viz).draw(newdata1, options );    
