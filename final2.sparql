@@ -1,6 +1,6 @@
 SELECT distinct ?year ?st ?stack_air ?fugitive_air ?water
  WHERE {
- GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/version/2010-Sep-28>{
+ GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/version/2010-Dec-17>{
  
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/year> ?year.
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/st> ?st .
