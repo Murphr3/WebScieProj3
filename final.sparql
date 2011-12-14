@@ -1,5 +1,5 @@
 SELECT distinct ?year ?st ?stack_air ?fugitive_air ?water
- WHERE {{
+ WHERE {
  GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2575/version/2010-Sep-28>{
  
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2575/vocab/raw/year> ?year.
@@ -7,41 +7,6 @@ SELECT distinct ?year ?st ?stack_air ?fugitive_air ?water
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2575/vocab/raw/p_5_2_stack_air> ?stack_air.
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2575/vocab/raw/p_5_1_fugitive_air> ?fugitive_air.
    ?s1  <http://logd.tw.rpi.edu/source/data-gov/dataset/2575/vocab/raw/p_5_3_water> ?water .
- }
-}UNION{
- GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/version/2010-Dec-17>{
- 
-   ?s2  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/year> ?year.
-   ?s2  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/st> ?st .
-   ?s2  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/p_5_2_stack_air> ?stack_air.
-   ?s2  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/p_5_1_fugitive_air> ?fugitive_air.
-   ?s2  <http://logd.tw.rpi.edu/source/data-gov/dataset/2680/vocab/raw/p_5_3_water> ?water .
- }
-}UNION{
- GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/version/2010-Dec-13>{
- 
-   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/year> ?year.
-   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/st> ?st .
-   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_2_stack_air> ?stack_air.
-   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_1_fugitive_air> ?fugitive_air.
-   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_3_water> ?water .
- }
-}UNION{
- GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/version/2010-Dec-17>{
- 
-   ?s4  <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/vocab/raw/year> ?year.
-   ?s4  <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/vocab/raw/st> ?st .
-   ?s4  <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/vocab/raw/p_5_2_stack_air> ?stack_air.
-   ?s4  <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/vocab/raw/p_5_1_fugitive_air> ?fugitive_air.
-   ?s4  <http://logd.tw.rpi.edu/source/data-gov/dataset/3443/vocab/raw/p_5_3_water> ?water .
- }
-}UNION{
-  GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/3733/version/2010-Dec-17>{ 
-   ?s5  <http://logd.tw.rpi.edu/source/data-gov/dataset/3733/vocab/raw/year> ?year.
-   ?s5  <http://logd.tw.rpi.edu/source/data-gov/dataset/3733/vocab/raw/st> ?st .
-   ?s5  <http://logd.tw.rpi.edu/source/data-gov/dataset/3733/vocab/raw/p_5_2_stack_air> ?stack_air.
-   ?s5  <http://logd.tw.rpi.edu/source/data-gov/dataset/3733/vocab/raw/p_5_1_fugitive_air> ?fugitive_air. 
- }
  }
 }
 ORDER BY ?year ?st
