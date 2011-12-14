@@ -1,0 +1,118 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<title>Toxicity by State</title>
+ 	
+ 	<!--   import Google visualization  API -->
+  	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+  	<!--   customize function -->
+  	<script type="text/javascript">
+	/* <![CDATA[ */
+      // load google visualization packages
+      google.load('visualization', '1', {'packages': ['geomap']});
+        
+      // set callback function for drawing visualizations
+      google.setOnLoadCallback(drawMap);
+   
+      function drawMap() {
+        //load data using SPARQL query
+        var sparqlproxy = "http://logd.tw.rpi.edu/ws/sparqlproxy.php";
+        var queryloc = "https://raw.github.com/Murphr3/WebScieProj3/master/final_final.sparql";  
+        var service = "http://logd.tw.rpi.edu/sparql";
+        var queryurl = sparqlproxy 
+                + "?" + "output=gvds"
+                + "&service-uri=" + encodeURIComponent(service)
+                + "&query-uri=" + encodeURIComponent(queryloc) ;
+      	
+      	var query = new google.visualization.Query(queryurl); // Send the query.
+      	query.send(handleQueryResponse);
+      }
+  
+      function  handleQueryResponse(response){
+      	// Check for query response errors.
+      	if (response.isError()) {
+           alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+           return;
+      	}
+
+      	// read data      	
+      	var data = response.getDataTable();
+      	
+      	// create new data
+      	var newdata1 = new google.visualization.DataTable();
+	var newdata2 = new google.visualization.DataTable();
+      	newdata1.addColumn('string', 'State');
+      	newdata1.addColumn('number', 'Toxicity Rating');
+      	newdata2.addColumn('string', 'State');
+      	newdata2.addColumn('number', 'Toxicity Rating');
+
+      	var rows = data.getNumberOfRows();
+	var year = data.getValue(0,0);
+      	for (var i = 0; i < rows; i++ )
+      	{
+          year = data.getValue(i,0);
+      	  var state = 'US-' + data.getValue(i, 1);
+	  var myTemp = state;
+      	  var value =  data.getValue(i,2)+data.getValue(i,3);
+
+		while (myTemp == state && i < rows){
+
+			value = value + data.getValue(i,2)+data.getValue(i,3);
+			myTemp = 'US-'+data.getValue(i,1);
+			i++;
+		}      	
+		if(year == 2009){ newdata1.addRow([state,value]);}
+		if(year == 2005){ newdata2.addRow([state,value]);}
+	}
+	
+	newdata1.sort(0);
+	newdata2.sort(0);
+	var rows1 = newdata1.getNumberOfRows();
+	var rows2 = newdata2.getNumberOfRows();
+	for(var i = 0;i<rows1;i++){
+		for (var j = 0;j < rows2;j++){
+			var state1 = newdata1.getValue(i,0);
+			var state2 = newdata2.getValue(j,0);
+			if(state1 == state2){
+				var value1 = newdata1.getValue(i,1);
+				var value2 = newdata2.getValue(j,1);
+				if(value2 = 0 && value1 > 0){
+					value = 0;
+				}
+				else {
+					value = value1-value2;
+				}
+				newdata1.setCell(i,1,value);		
+			}
+		}
+	}
+	newdata1.sort(1);
+	
+	rows = newdata1.getNumberOfRows();
+	for(var i = 0; i < rows; i++){
+		newdata1.setCell(i,1,i+1);
+	}
+      	
+      	// configure map options                      
+      	var options = {};
+      	options['region'] = 'US';	// show US map
+      	options['dataMode'] = 'regions';
+      	options['width'] = 900;
+      	options['height'] = 550;
+	options['colors']=[0xFFEF3D,0xDB1212]
+
+        var viz = document.getElementById('map_canvas');
+        new google.visualization.GeoMap(viz).draw(newdata1, options );    
+      }
+	/* ]]> */
+	</script>
+  	
+  </head>
+  <body>
+      <div>Toxicity by State.</div>
+      <div id='map_canvas'>Loading Map ...</div>
+  </body>
+</html>
