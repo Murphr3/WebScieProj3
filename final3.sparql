@@ -1,0 +1,12 @@
+SELECT distinct ?year ?st ?stack_air ?fugitive_air ?water
+ WHERE {
+GRAPH <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/version/2010-Dec-13>{
+ 
+   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/year> ?year.
+   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/st> ?st .
+   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_2_stack_air> ?stack_air.
+   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_1_fugitive_air> ?fugitive_air.
+   ?s3  <http://logd.tw.rpi.edu/source/data-gov/dataset/2970/vocab/raw/p_5_3_water> ?water .
+ }
+}
+ORDER BY ?year ?st
